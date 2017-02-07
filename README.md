@@ -13,7 +13,7 @@ When writing a method that requires the use of the current time, it's very easy 
 
 (The structure `DateTime` has been largely superseded by `DateTimeOffset`, and has limited remaining use cases.)
 
-These properties will give the correct answers and work as promised in application code. Where their application becomes troublesome is in *tests* of that application code. The property `DateTimeOffset.Now` is incapable of returning anything but the current system time in the local time offset. If a test requires that it be run on 2010-07-28 in order to achieve a divergence value of 1.048596%, then the test can only be run on that actual day. Tests that are hard or impossible to write will not get written, tests that are not written test no functionality, and functionality that is not tested is fragile.
+These properties will give the correct answers and work as promised in application code. Where their use becomes troublesome is in *tests* of that application code. The property `DateTimeOffset.Now` is incapable of returning anything but the current system time in the local time offset. If a test requires that it be run on 2010-07-28 in order to achieve a divergence value of 1.048596%, then the test can only be run on that actual day. Tests that are hard or impossible to write will not get written, tests that are not written test no functionality, and functionality that is not tested is fragile.
 
 In a language such as C#, this is typically overcome by use of inversion of control (IoC), and there is nothing preventing date and time calculation from joining in.
 
