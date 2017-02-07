@@ -23,7 +23,7 @@ Services that require use of system time should take a dependency (by whatever m
 
 When testing that service, it can take a dependency on a mock `IClock` or a specialized fake `IClock`.
 
-### A Note on testing
+### A Note on Testing
 
 From implementation experience, a curious pattern in testing has emerged. If you are using Autofixture or some other test-data–generating library, it's easier to let the data be generated with whatever datetime values are randomly chosen by the library and redefine *now* to be within the test's tolerance of that generated value.
 
