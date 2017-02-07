@@ -1,0 +1,60 @@
+{
+  "version": "1.0.0-*",
+  "name": "Tiger.Clock",
+  "title": "Tiger Clock",
+  "description": "An injectable, mockable source of the current date and time.",
+  "language": "en-US",
+  "authors": [ "cosborn@cimpress.com" ],
+  "copyright": "Copyright ©Cimpress 2017",
+
+  "buildOptions": {
+    "debugType": "portable",
+    "xmlDoc": true,
+    "warningsAsErrors": true,
+    "define": [ "TRACE" ],
+    "additionalArguments": [
+      "/ruleset:../../Tiger.ruleset",
+      "/additionalfile:../../stylecop.json"
+    ]
+  },
+  "configurations": {
+    "Debug": {
+      "buildOptions": {
+        "define": [ "DEBUG" ]
+      }
+    },
+    "Release": {
+      "buildOptions": {
+        "define": [ "RELEASE" ],
+        "optimize": true
+      }
+    }
+  },
+
+  "dependencies": {
+    "StyleCop.Analyzers": {
+      "type": "build",
+      "version": "1.0.0"
+    }
+  },
+
+  "frameworks": {
+    "netstandard1.0": {
+      "dependencies": {
+        "NETStandard.Library": "1.6.1"
+      }
+    }
+  },
+
+  "packOptions": {
+    "releaseNotes": "Everything is new!",
+    "owners": [ "cosborn@cimpress.com" ],
+    "repository": {
+      "type": "git",
+      "url": "https://mcpstash.cimpress.net/projects/TIGER/repos/clock"
+    },
+    "requireLicenseAcceptance": false,
+    "tags": [ "clock", "now", "datetime", "datetimeoffset", "injectable" ],
+    "iconUrl": "https://mcpstash.cimpress.net/projects/TIGER/repos/clock/browse/tiger_logo.png?raw"
+  }
+}
