@@ -2,8 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
+    <DebugType>portable</DebugType>
     <AssemblyName>Test</AssemblyName>
     <PackageId>Tiger.Clock.UnitTest</PackageId>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
