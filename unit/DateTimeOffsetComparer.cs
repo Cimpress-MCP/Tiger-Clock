@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using JetBrains.Annotations;
 using static System.Math;
+// ReSharper disable CheckNamespace
 
 namespace Tiger.Clock.Tests
 {
@@ -9,6 +11,7 @@ namespace Tiger.Clock.Tests
     /// Represents a <see cref="DateTimeOffset"/> comparison operation that
     /// uses specific tolerance rules.
     /// </summary>
+    [PublicAPI]
     public abstract class DateTimeOffsetComparer
         : IComparer<DateTimeOffset>, IEqualityComparer<DateTimeOffset>
     {
@@ -27,6 +30,7 @@ namespace Tiger.Clock.Tests
         /// </param>
         /// <returns>A <see cref="DateTimeOffsetComparer"/> object.</returns>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="tolerance"/> cannot be used as a duration.</exception>
+        [NotNull]
         public static DateTimeOffsetComparer Within(TimeSpan tolerance) => new WithinComparer(tolerance);
 
         /// <inheritdoc/>

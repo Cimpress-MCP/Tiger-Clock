@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26114.2
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiger.Clock", "src\Tiger.Clock.csproj", "{AEEDFB9E-7EF1-412F-96D4-9DC8935F23C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "test\Test.csproj", "{FDB1EE8E-E3A0-4E63-B526-B908A95A79D4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "unit\Test.csproj", "{FDB1EE8E-E3A0-4E63-B526-B908A95A79D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

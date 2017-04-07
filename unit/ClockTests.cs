@@ -2,6 +2,7 @@
 
 using System;
 using Xunit;
+using static System.DateTimeOffset;
 using static Tiger.Clock.Tests.DateTimeOffsetComparer;
 
 namespace Tiger.Clock.Tests
@@ -9,7 +10,7 @@ namespace Tiger.Clock.Tests
     /// <summary>Tests related to <see cref="StandardClock"/>.</summary>
     public class ClockTests
     {
-        public static readonly TheoryData<TimeSpan> _tolerances = new TheoryData<TimeSpan>
+        public static readonly TheoryData<TimeSpan> Tolerances = new TheoryData<TimeSpan>
         {
             TimeSpan.FromSeconds(1),
             TimeSpan.FromMilliseconds(500),
@@ -21,14 +22,14 @@ namespace Tiger.Clock.Tests
         };
 
         [Theory(DisplayName = "Now returns the current time in the current offset.")]
-        [MemberData(nameof(_tolerances))]
-        public void Now(TimeSpan tolerance)
+        [MemberData(nameof(Tolerances))]
+        public void Clock_Now(TimeSpan tolerance)
         {
             // arrange 
             var sut = new StandardClock();
 
             // act
-            var expected = DateTimeOffset.Now;
+            var expected = Now;
             var actual = sut.Now;
 
             // assert
@@ -36,14 +37,14 @@ namespace Tiger.Clock.Tests
         }
 
         [Theory(DisplayName = "UtcNow returns the current time in the universal offset.")]
-        [MemberData(nameof(_tolerances))]
-        public void UtcNow(TimeSpan tolerance)
+        [MemberData(nameof(Tolerances))]
+        public void Clock_UtcNow(TimeSpan tolerance)
         {
             // arrange 
             var sut = new StandardClock();
 
             // act
-            var expected = DateTimeOffset.UtcNow;
+            var expected = UtcNow;
             var actual = sut.UtcNow;
 
             // assert
