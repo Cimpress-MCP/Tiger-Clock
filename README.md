@@ -34,7 +34,7 @@ This project is using the standard [`dotnet`](https://dot.net) build tool. A bri
 - Restore NuGet dependencies: `dotnet restore`
 - Build the entire solution: `dotnet build`
 - Run all unit tests: `dotnet test`
-- Pack for publishing: `dotnet pack -o "$(pwd)/artifacts"`
+- Pack for publishing: `dotnet pack -o "$(pwd)/dist"`
 
 The parameter `--configuration` (shortname `-c`) can be supplied to the `build`, `test`, and `pack` steps with the following meaningful values:
 

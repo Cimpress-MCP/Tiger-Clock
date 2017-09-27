@@ -1,9 +1,8 @@
-﻿// ReSharper disable All
-
-using System;
+﻿using System;
 using Xunit;
 using static System.DateTimeOffset;
 using static Tiger.Clock.Tests.DateTimeOffsetComparer;
+// ReSharper disable All
 
 namespace Tiger.Clock.Tests
 {
