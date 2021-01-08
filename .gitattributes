@@ -1,4 +1,6 @@
-﻿###############################################################################
-# Set default behavior to automatically normalize line endings.
-###############################################################################
-* text=auto
+*                         text=auto
+.gitattributes            eol=lf
+.gitignore                eol=lf
+*.cs                      diff=csharp
+*.sln                     merge=union
+*.csproj                  merge=union

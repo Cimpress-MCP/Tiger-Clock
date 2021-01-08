@@ -1,0 +1,52 @@
+image: mcr.microsoft.com/dotnet/sdk:5.0-alpine
+
+stages:
+- build
+- test-pack
+- deploy
+
+variables:
+  CONFIGURATION: Release
+
+build:
+  stage: build
+  script:
+  - dotnet build
+  cache: &cache_template
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+    - ./src/*/bin/*
+    - ./unit/bin/*
+    policy: push
+
+test:
+  stage: test-pack
+  script:
+  - dotnet test --logger 'junit;MethodFormat=Class;FailureBodyFormat=Verbose' --collect 'XPlat Code Coverage'
+  cache:
+    <<: *cache_template
+    policy: pull
+  artifacts:
+    reports:
+      cobertura: ./unit/TestResults/**/coverage.cobertura.xml
+      junit: ./unit/TestResults/TestResults.xml
+
+pack:
+  stage: test-pack
+  script:
+  - dotnet pack --output "$(pwd)/dist/"
+  cache:
+    <<: *cache_template
+    policy: pull
+  artifacts:
+    untracked: false
+    paths:
+    - ./dist/
+
+deploy:
+  stage: deploy
+  script:
+  - dotnet nuget push ./dist/*.nupkg --api-key "${NUGET_API_KEY}"
+  only:
+    refs:
+    - main

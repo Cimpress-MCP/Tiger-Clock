@@ -1,9 +1,22 @@
-﻿using System;
+﻿// <copyright file="DateTimeOffsetComparer.cs" company="Cimpress, Inc.">
+//   Copyright 2020 Cimpress, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License") –
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
+// </copyright>
+
+using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using JetBrains.Annotations;
 using static System.Math;
-// ReSharper disable CheckNamespace
 
 namespace Tiger.Clock.Tests
 {
@@ -11,14 +24,13 @@ namespace Tiger.Clock.Tests
     /// Represents a <see cref="DateTimeOffset"/> comparison operation that
     /// uses specific tolerance rules.
     /// </summary>
-    [PublicAPI]
     public abstract class DateTimeOffsetComparer
         : IComparer<DateTimeOffset>, IEqualityComparer<DateTimeOffset>
     {
         /// <summary>
-        /// Gets a <see cref="DateTimeOffsetComparer"/> object that performs an exact comparison.
+        /// A <see cref="DateTimeOffsetComparer"/> object which performs an exact comparison.
         /// </summary>
-        public static DateTimeOffsetComparer Exact { get; } = new ExactComparer();
+        public static readonly DateTimeOffsetComparer Exact = new ExactComparer();
 
         /// <summary>
         /// Creates a <see cref="DateTimeOffsetComparer"/> object that performs a comparison
@@ -30,13 +42,14 @@ namespace Tiger.Clock.Tests
         /// </param>
         /// <returns>A <see cref="DateTimeOffsetComparer"/> object.</returns>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="tolerance"/> cannot be used as a duration.</exception>
-        [NotNull]
         public static DateTimeOffsetComparer Within(TimeSpan tolerance) => new WithinComparer(tolerance);
 
         /// <inheritdoc/>
         public abstract int Compare(DateTimeOffset x, DateTimeOffset y);
+
         /// <inheritdoc/>
         public abstract bool Equals(DateTimeOffset x, DateTimeOffset y);
+
         /// <inheritdoc/>
         public abstract int GetHashCode(DateTimeOffset obj);
 
@@ -61,14 +74,13 @@ namespace Tiger.Clock.Tests
         /// Represents a <see cref="DateTimeOffset"/> comparison operation that
         /// uses a specified tolerance value.
         /// </summary>
-        [SuppressMessage("ReSharper", "ExceptionNotDocumented", Justification = "Unusable durations checked for in advance of use.")]
         sealed class WithinComparer
             : DateTimeOffsetComparer
         {
             readonly TimeSpan _tolerance;
 
             /// <summary>
-            /// Initializes a new instance of the <see cref="DateTimeOffsetComparer.WithinComparer"/> class.
+            /// Initializes a new instance of the <see cref="WithinComparer"/> class.
             /// </summary>
             /// <param name="tolerance">
             /// The duration within which two <see cref="DateTimeOffset"/> values must be
@@ -82,7 +94,7 @@ namespace Tiger.Clock.Tests
                     throw new ArgumentOutOfRangeException(
                         nameof(tolerance),
                         TimeSpan.MinValue,
-                        @"This value cannot be used as a duration.");
+                        "This value cannot be used as a duration.");
                 }
 
                 _tolerance = tolerance.Duration();
@@ -96,9 +108,14 @@ namespace Tiger.Clock.Tests
                 {
                     return -1;
                 }
-                return difference.Duration() <= _tolerance
-                    ? 0 // note(cosborn) Being within tolerance is equality.
-                    : Sign(difference.Ticks);
+
+                if (difference.Duration() <= _tolerance)
+                {
+                    // note(cosborn) Being within tolerance is equality.
+                    return 0;
+                }
+
+                return Sign(difference.Ticks);
             }
 
             /// <inheritdoc/>
