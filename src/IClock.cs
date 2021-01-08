@@ -1,7 +1,7 @@
 ﻿// <copyright file="IClock.cs" company="Cimpress, Inc.">
-//   Copyright 2017 Cimpress, Inc.
+//   Copyright 2020 Cimpress, Inc.
 //
-//   Licensed under the Apache License, Version 2.0 (the "License");
+//   Licensed under the Apache License, Version 2.0 (the "License") –
 //   you may not use this file except in compliance with the License.
 //   You may obtain a copy of the License at
 //
@@ -15,12 +15,10 @@
 // </copyright>
 
 using System;
-using JetBrains.Annotations;
 
 namespace Tiger.Clock
 {
     /// <summary>Retrieves system time.</summary>
-    [PublicAPI]
     public interface IClock
     {
         /// <summary>Gets current system time in the local time offset.</summary>
