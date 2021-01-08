@@ -7,6 +7,7 @@ stages:
 
 variables:
   CONFIGURATION: Release
+  GIT_STRATEGY: clone
 
 build:
   stage: build
@@ -15,7 +16,7 @@ build:
   cache: &cache_template
     key: ${CI_COMMIT_REF_SLUG}
     paths:
-    - ./src/*/bin/*
+    - ./src/bin/*
     - ./unit/bin/*
     policy: push
 
